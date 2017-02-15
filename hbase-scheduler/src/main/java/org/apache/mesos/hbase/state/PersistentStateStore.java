@@ -23,7 +23,7 @@ import static org.apache.mesos.hbase.util.NodeTypes.*;
 
 /**
  * Persistence is handled by the Persistent State classes. This class does the
- * following:. 1) transforms raw types to hbase types and protobuf types 2)
+ * following:. 1) transforms(转换) raw types to hbase types and protobuf types 2)
  * handles exception logic and rethrows PersistenceException
  */
 @Singleton
@@ -120,6 +120,7 @@ public class PersistentStateStore implements IPersistentStateStore
         break;
       case HBaseConstants.STARGATE_NODE_ID:
         addStargateNode(taskId, hostname);
+        break;
       default:
         logger.error("Task name unknown");
     }

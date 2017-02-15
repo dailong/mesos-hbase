@@ -28,7 +28,19 @@
     <description>The secondary data directory in hbase</description>
     <value>/var/run/hadoop-hbase</value>
   </property>
+ 
+ <property>
+    <name>hbase.rootdir</name>
+    <description>hbase rootdir</description>
+    <value>hdfs://192.168.70.2:9000/hbase</value>
+  </property>
 
+  <property>
+    <name>dfs.nameservices</name>
+    <description>hdfs service name</description>
+    <value>beh</value>
+  </property>
+  
   <property>
     <name>mesos.hbase.native-hadoop-binaries</name>
     <description>Mark true if you have hadoop pre-installed on your host machines (otherwise it will be distributed by the scheduler)</description>
@@ -44,31 +56,31 @@
   <property>
     <name>mesos.hbase.state.zk</name>
     <description>Comma-separated hostname-port pairs of zookeeper node locations for HDFS framework state information</description>
-    <value>localhost:2181</value>
+    <value>192.168.70.2:2181,192.168.70.1:2181,192.168.70.3:2181</value>
   </property>
 
   <property>
     <name>mesos.master.uri</name>
     <description>Zookeeper entry for mesos master location</description>
-    <value>zk://localhost:2181/mesos</value>
+    <value>zk://192.168.70.2:2181,192.168.70.1:2181,192.168.70.3:2181/mesos</value>
   </property>
 
   <property>
     <name>mesos.hbase.zkfc.ha.zookeeper.quorum</name>
     <description>Comma-separated list of zookeeper hostname-port pairs for HDFS HA features</description>
-    <value>localhost:2181</value>
+    <value>192.168.70.2:2181,192.168.70.1:2181,192.168.70.3:2181</value>
   </property>
   
   <property>
     <name>hbase.rootdir.hdfs.nameserver.address</name>
     <description>HDFS nameserver address</description>
-    <value>localhost</value>
+    <value>192.168.70.2</value>
   </property>
   
   <property>
     <name>hbase.rootdir.hdfs.nameserver.port</name>
     <description>HDFS nameserver port</description>
-    <value>8020</value>
+    <value>9000</value>
   </property>
     
   <property>
@@ -86,7 +98,7 @@
   <property>
     <name>mesos.hbase.mesoshdfs</name>
     <description>Whether HDFS run on mesos too</description>
-    <value>true</value>
+    <value>false</value>
   </property>
   
   <property>

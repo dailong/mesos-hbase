@@ -21,7 +21,7 @@ public class TestConnectToHbase
 
   public static void main(String[] args) throws Exception
     {
-        String hbaseZookeeperQuorum="127.0.0.1,192.168.0.1";
+        String hbaseZookeeperQuorum="pingxiaogang01,pingxiaogang02,pingxiaogang03";
         int hbaseZookeeperClientPort=2181;
         // You need a configuration object to tell the client where to connect.
         // When you create a HBaseConfiguration, it reads in whatever you've set
@@ -31,7 +31,7 @@ public class TestConnectToHbase
         hConf.set(TestConnectToHbase.HBASE_CONFIGURATION_ZOOKEEPER_QUORUM, hbaseZookeeperQuorum);
         hConf.set(TestConnectToHbase.HBASE_CONFIGURATION_ZOOKEEPER_CLIENTPORT, String.valueOf(hbaseZookeeperClientPort));
         hConf.set("hbase.cluster.distributed", "true");
-        hConf.set("hbase.rootdir", "hdfs://hdfs/hbase");
+        hConf.set("hbase.rootdir", "hdfs://192.168.70.2/hbase");
         //timeout settings - see http://hadoop-hbase.blogspot.cz/2012/09/hbase-client-timeouts.html
         String smallTimeout = "200";
         hConf.set("zookeeper.session.timeout", smallTimeout);

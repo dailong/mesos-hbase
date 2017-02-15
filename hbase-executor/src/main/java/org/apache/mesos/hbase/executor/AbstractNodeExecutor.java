@@ -191,6 +191,7 @@ public abstract class AbstractNodeExecutor implements Executor {
 
     if (task.getProcess() == null) {
       try {
+        log.info("exe: " + "sh" +" -c " + task.getCmd());
         ProcessBuilder processBuilder = new ProcessBuilder("sh", "-c", task.getCmd());
         task.setProcess(processBuilder.start());
         redirectProcess(task.getProcess());

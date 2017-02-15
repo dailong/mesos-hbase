@@ -12,7 +12,7 @@ import org.apache.mesos.hbase.config.HBaseFrameworkConfig;
 import static org.apache.mesos.hbase.util.NodeTypes.*;
 
 /**
- * Manages the timeout timestamps for each node type.
+ * Manages the timeout timestamps(超时时间戳) for each node type.
  */
 public class DeadNodeTracker
 {

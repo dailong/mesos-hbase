@@ -14,12 +14,12 @@ if [ -z "$JAVA_HOME" ]; then
   fi
 fi
 
-trap "{ $DIR/mesos-killtree "$$" ; exit 0; }" EXIT
+trap "{ $DIR/hbase-mesos-killtree "$$" ; exit 0; }" EXIT
 
 function run_slavenode() {
-  while [ true ] ; do
+#  while [ true ] ; do
     $DIR/hbase-daemon.sh start regionserver
-  done
+#  done
 }
 
 run_slavenode

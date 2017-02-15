@@ -11,7 +11,7 @@ BUILD_CACHE_DIR=$BUILD_DIR/cache
 HBASE_VER=1.1.2
 HBASE_DIR=hbase-$HBASE_VER
 HBASE_ZIP=$HBASE_DIR-bin.tar.gz
-HBASE_URL=https://www.apache.org/dist/hbase/1.1.2/$HBASE_ZIP
+HBASE_URL=http://archive.apache.org/dist/hbase/1.1.2/$HBASE_ZIP
 
 echo "build dir is: $BUILD_DIR"
 
@@ -26,10 +26,16 @@ if [ "$1" == "clean" ]; then
   exit 0
 fi
 
-# Build and package hbase-mesos project
-if [ "$1" != "nocompile" ]; then
+
+
+ #and package hbase-mesos project
+if [ "$1" == "nocompile" ]; then
   $PROJ_DIR/gradlew clean shadowJar || exit
+
 fi
+
+
+# Build and package hbase-mesos project
 
 if [ "$1" == "install" ]; then
   if [ "$#" -ne 2 ]; then
@@ -43,12 +49,12 @@ mkdir $BUILD_DIR
 mkdir $BUILD_CACHE_DIR
 
 # Download hbase binary
-if [ ! -f $BUILD_CACHE_DIR/$HBASE_ZIP ]; then
-  echo "Downloading $HADOOP_URL"
-  wget -P $BUILD_CACHE_DIR $HBASE_URL || exit
-else
-  echo "($HBASE_ZIP already exists, skipping dl)"
-fi
+#if [ ! -f $BUILD_CACHE_DIR/$HBASE_ZIP ]; then
+#  echo "Downloading $HADOOP_URL"
+#  wget -P $BUILD_CACHE_DIR $HBASE_URL || exit
+#else
+# echo "($HBASE_ZIP already exists, skipping dl)"
+#fi
 
 # Extract hbase
 if [ ! -d $BUILD_CACHE_DIR/$HBASE_DIR ]; then

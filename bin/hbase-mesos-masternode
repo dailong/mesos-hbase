@@ -9,17 +9,17 @@ if [ -z "$JAVA_HOME" ]; then
   elif [ -f $JAVA_HOME_DIR/../bin/java ]; then
     export JAVA_HOME=$JAVA_HOME_DIR/..
   else 
-    echo “Error: Could not determine JAVA_HOME”
+    echo "Error: Could not determine JAVA_HOME"
     exit 1;
   fi
 fi
 
-trap "{ $DIR/mesos-killtree "$$" ; exit 0; }" EXIT
+trap "{ $DIR/hbase-mesos-killtree "$$" ; exit 0; }" EXIT
 
 function run_masternode() {
-  while [ true ] ; do
+#  while [ true ] ; do
     $DIR/hbase-daemon.sh start master
-  done
+#  done
 }
 
 run_masternode

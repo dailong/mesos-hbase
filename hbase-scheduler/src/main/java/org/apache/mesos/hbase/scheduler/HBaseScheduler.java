@@ -296,7 +296,7 @@ public class HBaseScheduler implements org.apache.mesos.Scheduler, Runnable {
   private boolean launchNode(SchedulerDriver driver, Offer offer,
       String nodeName, String taskType, String executorName) {
     // nodeName is the type of executor to launch
-    // executorName is to distinguish different types of nodes
+    // executorName is to distinguish(区分) different types of nodes
     // taskType is the type of task in mesos to launch on the node
     // taskName is a name chosen to identify the task in mesos and mesos-dns (if used)
     log.info(String.format("Launching node of type %s with task %s", nodeName, taskType));
@@ -402,7 +402,10 @@ public class HBaseScheduler implements org.apache.mesos.Scheduler, Runnable {
                     .build(),
                 CommandInfo.URI
                     .newBuilder()
-                    .setValue(hbaseFrameworkConfig.getJreUrl())
+                    .setValue(String.format("http://%s:%d/lib/%s",
+                                hbaseFrameworkConfig.getFrameworkHostAddress(),
+                                confServerPort,
+                                HBaseConstants.HBASE_JRE_FILE_NAME))
                     .build()))
             .setEnvironment(Environment
                 .newBuilder()
@@ -544,8 +547,8 @@ public class HBaseScheduler implements org.apache.mesos.Scheduler, Runnable {
   }
 
   private boolean tryToLaunchSlaveNode(SchedulerDriver driver, Offer offer) {
-    if (!acceptOffer(offer, "slave", hbaseFrameworkConfig.getMasterNodeCpus(),
-        hbaseFrameworkConfig.getMasterNodeHeapSize()))
+    if (!acceptOffer(offer, "slave", hbaseFrameworkConfig.getSlaveNodeCpus(),
+        hbaseFrameworkConfig.getSlaveNodeHeapSize()))
       return false;
 
     boolean launch = false;
@@ -710,7 +713,7 @@ public class HBaseScheduler implements org.apache.mesos.Scheduler, Runnable {
 
   private String getHbaseConfigServerHdfsFileUrl()
   {
-    return String.format("http://%s:%d/%s",
+    return String.format("http://%s:%d/conf/%s",
         hbaseFrameworkConfig.getFrameworkHostAddress(),
         hbaseFrameworkConfig.getConfigServerPort(),
         HBaseConstants.HDFS_CONFIG_FILE_NAME);

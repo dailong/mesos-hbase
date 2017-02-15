@@ -37,6 +37,7 @@ public final class HBaseConstants {
 
   // region servers file name
   public static final String REGION_SERVERS_FILENAME = "regionservers";
+  public static final String HBASE_JRE_FILE_NAME = "jre-7u76-linux-x64.tar.gz";
 
   private HBaseConstants() {
   }
